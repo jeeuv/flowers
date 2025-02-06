@@ -29,19 +29,19 @@
     }
 
     .text-1 {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #d65d89;
     }
 
     .text-2 {
-      font-size: 1.8rem;
+      font-size: 1.3rem;
       font-weight: bold;
       color: #9855c3;
     }
 
     .text-3 {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       font-weight: bold;
       color: #cc4649;
     }
@@ -49,8 +49,8 @@
     /* Flower Styling */
     .flower {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       pointer-events: none;
     }
   </style>
@@ -105,7 +105,7 @@
       let flowerCount = 0;
 
       const interval = setInterval(() => {
-        if (flowerCount >= 1000) { // Increased count for heavy overlap
+        if (flowerCount >= 1500) { // Increased count for heavy overlap
           clearInterval(interval);
           setTimeout(() => {
             createFlower(centerX - 50, centerY - 50, "https://raw.githubusercontent.com/jeeuv/flowers/main/images/special.png");
@@ -113,15 +113,15 @@
           return;
         }
 
-        const radius = Math.floor(flowerCount / 30) * 20; // Smaller radius increment
-        const angle = (flowerCount % 30) * (Math.PI / 15); // Higher flower density per circle
-        const x = centerX + radius * Math.cos(angle) - 40;
-        const y = centerY + radius * Math.sin(angle) - 40;
+        const radius = Math.floor(flowerCount / 25) * 15; // Smaller radius increment
+        const angle = (flowerCount % 25) * (Math.PI / 12.5); // Higher flower density per circle
+        const x = centerX + radius * Math.cos(angle) - 50;
+        const y = centerY + radius * Math.sin(angle) - 50;
         const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
 
         createFlower(x, y, randomFlowerSrc);
         flowerCount++;
-      }, 50); // Faster interval for quicker display
+      }, 30); // Faster interval for quicker display
     };
 
     // Helper to create flower elements
