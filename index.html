@@ -13,12 +13,13 @@
       justify-content: center;
       cursor: pointer;
       margin: 0;
-      background: linear-gradient(to bottom right, #fcb7af, #ff8882);
+      background: url('https://raw.githubusercontent.com/jeeuv/flowers/main/images/soft-pink-background.jpg') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Georgia', serif;
     }
 
     .stage-3 {
-      background: #f7a3c3;
+      background: rgba(247, 163, 195, 0.7);
     }
 
     /* Text Styling */
@@ -34,13 +35,13 @@
     }
 
     .text-2 {
-      font-size: 1.75rem;
+      font-size: 1.8rem;
       font-weight: bold;
       color: #9855c3;
     }
 
     .text-3 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: bold;
       color: #cc4649;
     }
@@ -50,6 +51,7 @@
       position: absolute;
       width: 80px;
       height: 80px;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -103,7 +105,7 @@
       let flowerCount = 0;
 
       const interval = setInterval(() => {
-        if (flowerCount >= 200) {
+        if (flowerCount >= 1000) { // Increased count for heavy overlap
           clearInterval(interval);
           setTimeout(() => {
             createFlower(centerX - 50, centerY - 50, "https://raw.githubusercontent.com/jeeuv/flowers/main/images/special.png");
@@ -111,15 +113,15 @@
           return;
         }
 
-        const radius = Math.floor(flowerCount / 10) * 60;
-        const angle = (flowerCount % 10) * (Math.PI / 5);
+        const radius = Math.floor(flowerCount / 30) * 20; // Smaller radius increment
+        const angle = (flowerCount % 30) * (Math.PI / 15); // Higher flower density per circle
         const x = centerX + radius * Math.cos(angle) - 40;
         const y = centerY + radius * Math.sin(angle) - 40;
         const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
 
         createFlower(x, y, randomFlowerSrc);
         flowerCount++;
-      }, 200);
+      }, 50); // Faster interval for quicker display
     };
 
     // Helper to create flower elements
@@ -129,7 +131,6 @@
       img.className = "flower";
       img.style.left = `${x}px`;
       img.style.top = `${y}px`;
-      img.style.zIndex = Math.floor(Math.random() * 10); // Overlapping effect
       app.appendChild(img);
     };
 
