@@ -1,143 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rose Day Page</title>
   <style>
-    /* Base Container */
     body {
-      min-height: 100vh;
+      margin: 0;
+      background-color: #f8d6e3;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      margin: 0;
-      background: linear-gradient(to bottom right, #fde2e4, #fab1a0);
-      font-family: 'Georgia', serif;
+      flex-direction: column;
     }
 
-    .stage-3 {
-      background: #f5ccd6;
+    #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f8d6e3;
+      transition: background-color 0.5s;
     }
 
-    /* Text Styling */
-    .text {
-      color: #c33e77;
-      text-align: center;
-    }
-
-    .text-1 {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #d65d89;
-    }
-
-    .text-2 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #9855c3;
-    }
-
-    .text-3 {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #cc4649;
-    }
-
-    /* Flower Styling */
     .flower {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+    }
+
+    h1 {
+      position: fixed;
+      font-size: 16px;
+      color: #333;
+      top: 10px;
+      left: 10px;
     }
   </style>
 </head>
-<body id="app">
+<body>
+  <div id="container">
+    <h1>Happy Rose Day!</h1>
+  </div>
+
   <script>
-    const app = document.getElementById("app");
-    let stage = 0;
-    const flowers = [];
+    const container = document.getElementById("container");
     const flowerImages = [
-      "https://github.com/jeeuv/flowers/blob/main/images/A.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/b.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/c.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/d.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/e.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/f.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/g.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/k.png?raw=true"
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/i.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/j.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/k.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/l.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/flower1.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/flower2.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/flower3.png"
     ];
 
-    // Function to update UI based on stage
-    const updateStage = () => {
-      app.className = `${stage === 3 ? "stage-3" : ""}`;
-      app.innerHTML = "";
+    let flowerCount = 0;
 
-      if (stage === 0) {
-        createText("Hiiii", "text text-1");
-      } else if (stage === 1) {
-        createText("You know today is Rose Day??", "text text-2");
-      } else if (stage === 2) {
-        createText("So here are some flowers for you!", "text text-3");
-      } else {
-        displayFlowers();
-      }
-    };
-
-    // Helper to create text elements
-    const createText = (text, className) => {
-      const element = document.createElement("h1");
-      element.className = className;
-      element.textContent = text;
-      app.appendChild(element);
-    };
-
-    // Flower display logic
-    const displayFlowers = () => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      let flowerCount = 0;
-
-      const interval = setInterval(() => {
-        if (flowerCount >= 200) {
-          clearInterval(interval);
-          setTimeout(() => {
-            createFlower(centerX - 50, centerY - 50, "https://github.com/jeeuv/flowers/blob/main/images/A.png?raw=true");
-          }, 1000);
-          return;
-        }
-
-        const radius = Math.floor(flowerCount / 10) * 70;
-        const angle = (flowerCount % 10) * (Math.PI / 5);
-        const x = centerX + radius * Math.cos(angle) - 40;
-        const y = centerY + radius * Math.sin(angle) - 40;
-        const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
-
-        createFlower(x, y, randomFlowerSrc);
-        flowerCount++;
-      }, 200);
-    };
-
-    // Helper to create flower elements
-    const createFlower = (x, y, src) => {
+    function spawnFlower() {
       const img = document.createElement("img");
-      img.src = src;
+      img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
       img.className = "flower";
-      img.style.left = `${x}px`;
-      img.style.top = `${y}px`;
-      app.appendChild(img);
-    };
+      img.style.left = `${Math.random() * 90}vw`;
+      img.style.top = `${Math.random() * 90}vh`;
+      container.appendChild(img);
 
-    // Click event handler
-    app.addEventListener("click", () => {
-      if (stage < 3) {
-        stage++;
-        updateStage();
+      if (flowerCount === 5) {
+        container.style.backgroundColor = "#999999";
       }
-    });
 
-    // Initialize the first stage
+      flowerCount++;
+    }
+
+    function updateStage() {
+      spawnFlower();
+      if (flowerCount < 150) {
+        requestAnimationFrame(updateStage);
+      }
+    }
+
     updateStage();
   </script>
 </body>
