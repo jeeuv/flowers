@@ -59,26 +59,14 @@
     let stage = 0;
     const flowers = [];
     const flowerImages = [
-      "C:\Users\shara\Desktop\New folder (4)\images\A.png",
-      "/path-to-flower2.png",
-      "/path-to-flower3.png",
-      "/path-to-flower4.png",
-      "/path-to-flower5.png",
-      "/path-to-flower6.png",
-      "/path-to-flower7.png",
-      "/path-to-flower8.png",
-      "/path-to-flower9.png",
-      "/path-to-flower10.png",
-      "/path-to-flower11.png",
-      "/path-to-flower12.png",
-      "/path-to-flower13.png",
-      "/path-to-flower14.png",
-      "/path-to-flower15.png",
-      "/path-to-flower16.png",
-      "/path-to-flower17.png",
-      "/path-to-flower18.png",
-      "/path-to-flower19.png",
-      "/path-to-flower20.png"
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/A.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/b.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/c.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/d.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/e.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/f.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/g.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/k.png"
     ];
 
     // Function to update UI based on stage
@@ -115,7 +103,7 @@
         if (flowerCount >= 200) {
           clearInterval(interval);
           setTimeout(() => {
-            createFlower(centerX - 50, centerY - 50, "/path-to-special-flower.png");
+            createFlower(centerX - 50, centerY - 50, "https://raw.githubusercontent.com/jeeuv/flowers/main/images/A.png");
           }, 1000);
           return;
         }
@@ -150,6 +138,10 @@
     });
 
     // Initialize the first stage
+    updateStage();
+  </script>
+</body>
+</html>
     updateStage();
   </script>
 </body>
