@@ -28,19 +28,19 @@
     }
 
     .text-1 {
-      font-size: 4rem;
+      font-size: 2rem;
       font-weight: bold;
       color: #d65d89;
     }
 
     .text-2 {
-      font-size: 3rem;
+      font-size: 1.75rem;
       font-weight: bold;
       color: #9855c3;
     }
 
     .text-3 {
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #cc4649;
     }
@@ -48,8 +48,8 @@
     /* Flower Styling */
     .flower {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 80px;
+      height: 80px;
     }
   </style>
 </head>
@@ -113,8 +113,8 @@
 
         const radius = Math.floor(flowerCount / 10) * 60;
         const angle = (flowerCount % 10) * (Math.PI / 5);
-        const x = centerX + radius * Math.cos(angle) - 25;
-        const y = centerY + radius * Math.sin(angle) - 25;
+        const x = centerX + radius * Math.cos(angle) - 40;
+        const y = centerY + radius * Math.sin(angle) - 40;
         const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
 
         createFlower(x, y, randomFlowerSrc);
@@ -129,6 +129,7 @@
       img.className = "flower";
       img.style.left = `${x}px`;
       img.style.top = `${y}px`;
+      img.style.zIndex = Math.floor(Math.random() * 10); // Overlapping effect
       app.appendChild(img);
     };
 
@@ -145,4 +146,5 @@
   </script>
 </body>
 </html>
+
 
