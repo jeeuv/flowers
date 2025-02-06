@@ -1,85 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      background-color: #f8d6e3;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    #container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background-color: #f8d6e3;
-      transition: background-color 0.5s;
-    }
-
-    .flower {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      pointer-events: none;
-    }
-
-    h1 {
-      position: fixed;
-      font-size: 16px;
-      color: #333;
-      top: 10px;
-      left: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div id="container">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day Celebration</title>
+    <style>
+      body {
+        background-color: #ffc0cb;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        overflow: hidden;
+        text-align: center;
+        transition: background-color 0.5s ease;
+      }
+      h1 {
+        font-size: 2.5em;
+        margin-top: 10px;
+        color: #4a4a4a;
+      }
+      #flower-container {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      img.flower {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        user-select: none;
+        pointer-events: none;
+        transition: transform 0.5s ease;
+      }
+    </style>
+  </head>
+  <body>
     <h1>Happy Rose Day!</h1>
-  </div>
+    <div id="flower-container"></div>
+    <script>
+      const flowerImages = [
+        "https://github.com/jeeuv/flowers/blob/main/images/A.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/b.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/c.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/d.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/e.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/f.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/g.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/k.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/h.png?raw=true",
+        "https://github.com/jeeuv/flowers/blob/main/images/i.png?raw=true"
+      ];
 
-  <script>
-    const container = document.getElementById("container");
-    const flowerImages = [
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/i.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/j.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/k.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/l.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/flower1.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/flower2.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/flower3.png"
-    ];
+      const container = document.getElementById("flower-container");
+      let flowerCount = 0;
 
-    let flowerCount = 0;
+      function createFlower() {
+        const img = document.createElement("img");
+        img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+        img.classList.add("flower");
 
-    function spawnFlower() {
-      const img = document.createElement("img");
-      img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
-      img.className = "flower";
-      img.style.left = `${Math.random() * 90}vw`;
-      img.style.top = `${Math.random() * 90}vh`;
-      container.appendChild(img);
+        const angle = Math.random() * 2 * Math.PI;
+        const radius = Math.random() * (window.innerWidth / 3);
+        const x = window.innerWidth / 2 + radius * Math.cos(angle) - 60;
+        const y = window.innerHeight / 2 + radius * Math.sin(angle) - 60;
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
 
-      if (flowerCount === 5) {
-        container.style.backgroundColor = "#999999";
+        container.appendChild(img);
+        flowerCount++;
+
+        setTimeout(() => container.removeChild(img), 10000);
+
+        if (flowerCount > 30) {
+          document.body.style.backgroundColor = "#b0b0b0";
+        }
       }
 
-      flowerCount++;
-    }
-
-    function updateStage() {
-      spawnFlower();
-      if (flowerCount < 150) {
-        requestAnimationFrame(updateStage);
+      function updateStage() {
+        createFlower();
+        setTimeout(updateStage, 400);
       }
-    }
 
-    updateStage();
-  </script>
-</body>
+      updateStage();
+    </script>
+  </body>
 </html>
-
