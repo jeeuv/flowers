@@ -59,26 +59,17 @@
     let stage = 0;
     const flowers = [];
     const flowerImages = [
-      "https://github.com/jeeuv/flowers/blob/main/images/A.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/b.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/c.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/d.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/e.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/f.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/g.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/h.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/i.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/j.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/k.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/l.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/m.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/n.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/o.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/p.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/q.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/r.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/s.png?raw=true",
-      "https://github.com/jeeuv/flowers/blob/main/images/t.png?raw=true"
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/A.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/b.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/c.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/d.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/e.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/f.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/g.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/h.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/i.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/j.png",
+      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/l.png"
     ];
 
     // Function to update UI based on stage
@@ -115,7 +106,7 @@
         if (flowerCount >= 200) {
           clearInterval(interval);
           setTimeout(() => {
-            createFlower(centerX - 50, centerY - 50, "https://github.com/jeeuv/flowers/blob/main/images/special.png?raw=true");
+            createFlower(centerX - 50, centerY - 50, "https://raw.githubusercontent.com/jeeuv/flowers/main/images/special.png");
           }, 1000);
           return;
         }
@@ -154,3 +145,4 @@
   </script>
 </body>
 </html>
+
