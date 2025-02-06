@@ -113,8 +113,8 @@
           return;
         }
 
-        const radius = Math.floor(flowerCount / 25) * 15; // Smaller radius increment
-        const angle = (flowerCount % 25) * (Math.PI / 12.5); // Higher flower density per circle
+        const radius = Math.floor(flowerCount / 25) * 14; // Smaller radius increment
+        const angle = (flowerCount % 25) * (Math.PI / 11); // Higher flower density per circle
         const x = centerX + radius * Math.cos(angle) - 50;
         const y = centerY + radius * Math.sin(angle) - 50;
         const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
