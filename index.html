@@ -13,12 +13,12 @@
       justify-content: center;
       cursor: pointer;
       margin: 0;
-      background: linear-gradient(to bottom right, #fcb7af, #ff8882);
+      background: linear-gradient(to bottom right, #fde2e4, #fab1a0);
       font-family: 'Georgia', serif;
     }
 
     .stage-3 {
-      background: #f7a3c3;
+      background: #f5ccd6;
     }
 
     /* Text Styling */
@@ -28,19 +28,19 @@
     }
 
     .text-1 {
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: bold;
       color: #d65d89;
     }
 
     .text-2 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: bold;
       color: #9855c3;
     }
 
     .text-3 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: bold;
       color: #cc4649;
     }
@@ -48,8 +48,8 @@
     /* Flower Styling */
     .flower {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 80px;
+      height: 80px;
     }
   </style>
 </head>
@@ -59,14 +59,14 @@
     let stage = 0;
     const flowers = [];
     const flowerImages = [
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/A.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/b.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/c.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/d.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/e.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/f.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/g.png",
-      "https://raw.githubusercontent.com/jeeuv/flowers/main/images/k.png"
+      "https://github.com/jeeuv/flowers/blob/main/images/A.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/b.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/c.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/d.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/e.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/f.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/g.png?raw=true",
+      "https://github.com/jeeuv/flowers/blob/main/images/k.png?raw=true"
     ];
 
     // Function to update UI based on stage
@@ -103,15 +103,15 @@
         if (flowerCount >= 200) {
           clearInterval(interval);
           setTimeout(() => {
-            createFlower(centerX - 50, centerY - 50, "https://raw.githubusercontent.com/jeeuv/flowers/main/images/A.png");
+            createFlower(centerX - 50, centerY - 50, "https://github.com/jeeuv/flowers/blob/main/images/A.png?raw=true");
           }, 1000);
           return;
         }
 
-        const radius = Math.floor(flowerCount / 10) * 60;
+        const radius = Math.floor(flowerCount / 10) * 70;
         const angle = (flowerCount % 10) * (Math.PI / 5);
-        const x = centerX + radius * Math.cos(angle) - 25;
-        const y = centerY + radius * Math.sin(angle) - 25;
+        const x = centerX + radius * Math.cos(angle) - 40;
+        const y = centerY + radius * Math.sin(angle) - 40;
         const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
 
         createFlower(x, y, randomFlowerSrc);
@@ -142,7 +142,4 @@
   </script>
 </body>
 </html>
-    updateStage();
-  </script>
-</body>
-</html>
+
