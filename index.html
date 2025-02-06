@@ -5,61 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rose Day Page</title>
   <style>
-    /* Base Container */
     body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
       margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
       background: url('https://raw.githubusercontent.com/jeeuv/flowers/main/images/soft-pink-background.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Georgia', serif;
+      cursor: pointer;
+      position: relative;
     }
 
-    .stage-3 {
-      background: rgba(247, 163, 195, 0.7);
-    }
-
-    /* Text Styling */
     .text {
-      color: #c33e77;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
+      color: #c33e77;
+      z-index: 2;
+      pointer-events: none;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
     }
 
-    .text-1 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #d65d89;
-    }
-
-    .text-2 {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #9855c3;
-    }
-
-    .text-3 {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #cc4649;
-    }
-
-    /* Flower Styling */
     .flower {
       position: absolute;
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
+      opacity: 0;
+      animation: bloom 2s ease-out forwards;
       pointer-events: none;
     }
+
+    @keyframes bloom {
+      from {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+      }
+    }
+
   </style>
 </head>
 <body id="app">
   <script>
     const app = document.getElementById("app");
     let stage = 0;
-    const flowers = [];
     const flowerImages = [
       "https://raw.githubusercontent.com/jeeuv/flowers/main/images/A.png",
       "https://raw.githubusercontent.com/jeeuv/flowers/main/images/b.png",
@@ -74,23 +72,20 @@
       "https://raw.githubusercontent.com/jeeuv/flowers/main/images/l.png"
     ];
 
-    // Function to update UI based on stage
     const updateStage = () => {
-      app.className = `${stage === 3 ? "stage-3" : ""}`;
       app.innerHTML = "";
 
       if (stage === 0) {
-        createText("Hiiii", "text text-1");
+        createText("Hiiii", "text");
       } else if (stage === 1) {
-        createText("You know today is Rose Day??", "text text-2");
+        createText("You know today is Rose Day??", "text");
       } else if (stage === 2) {
-        createText("So here are some flowers for you!", "text text-3");
+        createText("So here are some flowers for you!", "text");
       } else {
-        displayFlowers();
+        createFlowerStorm();
       }
     };
 
-    // Helper to create text elements
     const createText = (text, className) => {
       const element = document.createElement("h1");
       element.className = className;
@@ -98,43 +93,36 @@
       app.appendChild(element);
     };
 
-    // Flower display logic
-    const displayFlowers = () => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      let flowerCount = 0;
+    const createFlowerStorm = () => {
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const flowerSize = 120;
+      const flowersPerRow = Math.ceil(viewportWidth / (flowerSize * 0.6));
+      const rows = Math.ceil(viewportHeight / (flowerSize * 0.6));
 
-      const interval = setInterval(() => {
-        if (flowerCount >= 1500) { // Increased count for heavy overlap
-          clearInterval(interval);
+      for (let i = -1; i <= rows + 1; i++) {
+        for (let j = -1; j <= flowersPerRow + 1; j++) {
           setTimeout(() => {
-            createFlower(centerX - 50, centerY - 50, "https://raw.githubusercontent.com/jeeuv/flowers/main/images/special.png");
-          }, 1000);
-          return;
+            const img = document.createElement("img");
+            img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+            img.className = "flower";
+            
+            // Position with slight randomness and overlap
+            const offsetX = (Math.random() - 0.25) * flowerSize * 0.5;
+            const offsetY = (Math.random() - 0.25) * flowerSize * 0.5;
+            
+            img.style.left = `${(j * flowerSize * 0.6) + offsetX}px`;
+            img.style.top = `${(i * flowerSize * 0.6) + offsetY}px`;
+            
+            // Random rotation and scale
+            img.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4})`;
+            
+            app.appendChild(img);
+          }, Math.random() * 500);
         }
-
-        const radius = Math.floor(flowerCount / 25) * 14; // Smaller radius increment
-        const angle = (flowerCount % 25) * (Math.PI / 11); // Higher flower density per circle
-        const x = centerX + radius * Math.cos(angle) - 50;
-        const y = centerY + radius * Math.sin(angle) - 50;
-        const randomFlowerSrc = flowerImages[Math.floor(Math.random() * flowerImages.length)];
-
-        createFlower(x, y, randomFlowerSrc);
-        flowerCount++;
-      }, 30); // Faster interval for quicker display
+      }
     };
 
-    // Helper to create flower elements
-    const createFlower = (x, y, src) => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.className = "flower";
-      img.style.left = `${x}px`;
-      img.style.top = `${y}px`;
-      app.appendChild(img);
-    };
-
-    // Click event handler
     app.addEventListener("click", () => {
       if (stage < 3) {
         stage++;
@@ -142,7 +130,6 @@
       }
     });
 
-    // Initialize the first stage
     updateStage();
   </script>
 </body>
